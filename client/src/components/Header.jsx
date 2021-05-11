@@ -39,13 +39,18 @@ export const Header = ({ getSearch, addUser }) => {
   return (
     <nav
       className="navbar navbar-dark text-light d-flex justify-content-between"
-      style={{ backgroundColor: "#404040" }}
+      style={{
+        backgroundColor: "#404040",
+        position: "sticky",
+        top: "0px",
+        zIndex: 1,
+      }}
     >
       <div
-        className="d-flex justify-content-between"
+        className="d-flex justify-content-between text-center"
         style={{ ...styles.leftHeader }}
       >
-        <div className="h2 mt-2">Settyl Test</div>
+        <div className="h2 m-2">Settyl Test</div>
         <button
           className="btn btn-primary mt-2 mb-2"
           onClick={() => {
