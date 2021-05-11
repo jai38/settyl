@@ -214,11 +214,18 @@ export const Main = ({ users, deleteUser, addUserStatus, getNewUser }) => {
           >
             {user.name}
           </Card.Header>
-          <Card.Body>
+          <Card.Body style={{ fontSize: "120%" }}>
             <div id="front">
-              <div>Username: {user.username}</div>
-              <div>Email: {user.email}</div>
-              <div>website: {user.website}</div>
+              <div>
+                <b>Username:</b> {user.username}
+              </div>
+              <div>
+                <b>Email:</b> {user.email}
+              </div>
+              <div>
+                <b>Website: </b>
+                <a href={`https://${user.website}`}>{user.website}</a>
+              </div>
               <div
                 id={`front-btn-${user.id}`}
                 style={{ display: "flex" }}
@@ -239,13 +246,28 @@ export const Main = ({ users, deleteUser, addUserStatus, getNewUser }) => {
               </div>
             </div>
             <div id={`back-${user.id}`} style={{ display: "none" }}>
-              <div>Company: {user.company.name}</div>
-              <div>Phone: {user.phone}</div>
               <div>
-                Address:
-                <div>Street: {user.address.street}</div>
-                <div>City: {user.address.city}</div>
-                <div>Zipcode: {user.address.zipcode}</div>
+                <b>Company: </b>
+                {user.company.name}
+              </div>
+              <div>
+                <b>Phone: </b>
+                {user.phone}
+              </div>
+              <div>
+                <hr />
+                <b> Address-</b>
+                <div>
+                  <b>Street: </b>
+                  {user.address.street}
+                </div>
+                <div>
+                  <b>City: </b>
+                  {user.address.city}
+                </div>
+                <div>
+                  <b>Zipcode:</b> {user.address.zipcode}
+                </div>
               </div>
               <button
                 className="btn btn-secondary"
