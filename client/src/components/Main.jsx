@@ -7,7 +7,7 @@ const getSplited = (users, range) => {
   }
   return splitedUsers;
 };
-export const Main = ({ users }) => {
+export const Main = ({ users, addUserStatus }) => {
   const [mobile, setMobile] = useState(window.innerWidth <= 550);
   const handleDevice = () => {
     if (window.innerWidth <= 550) {
@@ -46,8 +46,11 @@ export const Main = ({ users }) => {
   const createCard = (user) => {
     return (
       <Col style={{ ...styles.col }} className="m-3">
-        <Card className="shadow p-3 mb-3 bg-white rounded">
-          <Card.Header className="d-flex justify-content-center shadow p-3 mb-3 rounded h4">
+        <Card className="shadow p-3 mb-3 bg-light rounded">
+          <Card.Header
+            className="d-flex justify-content-center shadow p-3 mb-3 rounded h4"
+            style={{ backgroundColor: "#cccccc" }}
+          >
             {user.name}
           </Card.Header>
           <Card.Body>
@@ -82,7 +85,7 @@ export const Main = ({ users }) => {
                 id={`back-btn-${user.id}`}
                 onClick={() => showLess(user.id)}
               >
-                Less
+                {(user.name && "Less") || "submit"}
               </button>
             </div>
           </Card.Body>

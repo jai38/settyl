@@ -6,6 +6,7 @@ export const App = () => {
   const [searchValue, setSearchValue] = useState("");
   const [users, setUsers] = useState();
   const [constUsers, setConstUsers] = useState();
+  const [addUser, setAddUser] = useState(false);
   const handleData = async () => {
     const res = await fetch("https://jsonplaceholder.typicode.com/users");
     const json = await res.json();
@@ -22,10 +23,33 @@ export const App = () => {
     newUsers = newUsers.filter((c) => c.name.match(reg));
     setUsers(newUsers);
   };
+  const handleAddUser = () => {
+    setAddUser((pre) => !pre);
+    let newUsers = users;
+    if (!addUser) {
+      let newUser = {
+        id: users.length,
+        address: {},
+        company: {},
+      };
+      newUsers.unshift(newUser);
+      setUsers(newUsers);
+    } else {
+      let newUsers = users;
+      if (!newUsers.name && !newUsers.email) {
+        newUsers.shift();
+        setUsers(newUsers);
+      }
+    }
+  };
   return (
     <div>
-      <Header getSearch={handleSearch} />
-      <Main users={users} />
+      <Header
+        getSearch={handleSearch}
+        addUser={handleAddUser}
+        addUserStatus={addUser}
+      />
+      <Main users={users} addUserStatus={addUser} />
       <Footer />
     </div>
   );
