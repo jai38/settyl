@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-export const Header = () => {
+export const Header = ({ getSearch }) => {
   const [mobile, setMobile] = useState(window.innerWidth <= 420);
+  const searchRef = useRef();
   const handleDevice = () => {
     if (window.innerWidth <= 420) {
       setMobile(true);
@@ -34,7 +35,6 @@ export const Header = () => {
   if (mobile) {
     styles = styleMobile;
   }
-  console.log(mobile);
   return (
     <nav className="navbar navbar-dark bg-dark text-light d-flex justify-content-between">
       <div
@@ -51,6 +51,8 @@ export const Header = () => {
             type="search"
             placeholder="Search"
             aria-label="Search"
+            ref={searchRef}
+            onChange={() => getSearch(searchRef.current.value)}
             style={{ ...styles.searchInput, position: "relative" }}
           />
         </form>
