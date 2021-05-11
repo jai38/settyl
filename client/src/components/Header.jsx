@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
-export const Header = ({ getSearch, addUser }) => {
+export const Header = ({ getSearch, addUser, btnText }) => {
   const [mobile, setMobile] = useState(window.innerWidth <= 420);
-  const [btnText, setBtnText] = useState("Add User");
   const searchRef = useRef();
   const handleDevice = () => {
     if (window.innerWidth <= 420) {
@@ -49,11 +48,6 @@ export const Header = ({ getSearch, addUser }) => {
         <button
           className="btn btn-primary mt-2 mb-2"
           onClick={() => {
-            if (btnText == "Cancel") {
-              setBtnText("Add User");
-            } else {
-              setBtnText("Cancel");
-            }
             addUser();
           }}
         >

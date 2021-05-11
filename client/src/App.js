@@ -7,6 +7,7 @@ export const App = () => {
   const [users, setUsers] = useState();
   const [constUsers, setConstUsers] = useState();
   const [addUser, setAddUser] = useState(false);
+  const [btnText, setBtnText] = useState("Add User");
   const handleData = async () => {
     const res = await fetch("https://jsonplaceholder.typicode.com/users");
     const json = await res.json();
@@ -27,6 +28,7 @@ export const App = () => {
     setAddUser((pre) => !pre);
     let newUsers = users;
     if (!addUser) {
+      setBtnText("Cancel");
       let newUser = {
         id: users.length,
         address: {},
@@ -35,6 +37,7 @@ export const App = () => {
       newUsers.unshift(newUser);
       setUsers(newUsers);
     } else {
+      setBtnText("Add User");
       let newUsers = users;
       if (!newUsers.name && !newUsers.email) {
         newUsers.shift();
@@ -42,14 +45,40 @@ export const App = () => {
       }
     }
   };
+  const deleteUser = (id) => {
+    if (id == users.length - 1) {
+      console.log(id);
+      setBtnText("Add User");
+      setAddUser(false);
+    }
+    let newUsers = JSON.parse(JSON.stringify(users));
+    newUsers = newUsers.filter((user) => user.id != id);
+    setUsers(newUsers);
+    setConstUsers(newUsers);
+  };
+  const handleNewUser = (user) => {
+    let newUsers = JSON.parse(JSON.stringify(users));
+    newUsers.shift();
+    newUsers.unshift(user);
+    setUsers(newUsers);
+    setConstUsers(newUsers);
+    setBtnText("Add User");
+    setAddUser(false);
+  };
   return (
     <div>
       <Header
         getSearch={handleSearch}
         addUser={handleAddUser}
         addUserStatus={addUser}
+        btnText={btnText}
       />
-      <Main users={users} addUserStatus={addUser} />
+      <Main
+        users={users}
+        deleteUser={deleteUser}
+        addUserStatus={addUser}
+        getNewUser={handleNewUser}
+      />
       <Footer />
     </div>
   );
