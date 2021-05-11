@@ -196,7 +196,7 @@ export const Main = ({ users, deleteUser, addUserStatus, getNewUser }) => {
                     id={`back-btn-${user.id}`}
                     onClick={() => addNewUser(user.id)}
                   >
-                    {"submit"}
+                    {"Submit"}
                   </button>
                 </div>
               </div>
@@ -253,7 +253,7 @@ export const Main = ({ users, deleteUser, addUserStatus, getNewUser }) => {
                 id={`back-btn-${user.id}`}
                 onClick={() => showLess(user.id)}
               >
-                {(user.name && "Less") || "submit"}
+                {"Less"}
               </button>
             </div>
           </Card.Body>
